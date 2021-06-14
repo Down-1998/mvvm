@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+        你好,{{content}},{{description}}<br/>
+        <span>{{description}}</span><br/>
+        {{obj.x}}
+        <input type="text" v-model="obj.x" />
+    </div>
+    
+    <!-- type=module  -->
+    <script type='module'>
+        
+        import Due from './core/index.js'; 
+        window.test2 = new Due(
+            { 
+                el: 'test', 
+                data: {
+                     content: 'wanxinlun', 
+                     description: 'hello world',
+                      obj: { x: 1, y: 2 }, 
+                      list: [{ a: 'wanxinlun', b: 18 }, { a: 'monkey', b: 23 }]
+                     } 
+            }
+        )
+    </script>
+</body>
+
+</html>
