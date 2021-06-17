@@ -60,13 +60,15 @@ export function prepareRender(vm, vnode) {
     if (vnode.nodeType == 3) {//是个文本节点
         analysisTemplateString(vnode);
     }
-    analysisAttr(vm, vnode);
-    if (vnode.nodeType == 1) {//标签
-        for (let i = 0; i < vnode.children.length; i++) {
-            prepareRender(vm, vnode.children[i]);
-        }
-
+    if (vnode.nodeType == 0) {
+        setTemplate2Vnode(vnode.data, vnode);
+        setVnode2Temlate(vnode.data, vnode)
     }
+    analysisAttr(vm, vnode);
+    for (let i = 0; i < vnode.children.length; i++) {
+        prepareRender(vm, vnode.children[i]);
+    }
+
 }
 
 function analysisTemplateString(vnode) {
@@ -131,4 +133,12 @@ function analysisAttr(vm, vnode) {
         setTemplate2Vnode(vnode.elm.getAttribute('v-model'), vnode);
         setVnode2Temlate(vnode.elm.getAttribute('v-model'), vnode);
     }
+}
+
+export function getVnodeByTemplate(template) {
+    return template2Vnode.get(template);
+}
+export function clearMap() {
+    template2Vnode.clear();
+    vnode2Template.clear();
 }

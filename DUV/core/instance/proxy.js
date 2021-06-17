@@ -1,4 +1,5 @@
 import { renderData } from './render.js';
+import { rebuild } from './mount.js';
 
 const arrProto = Array.prototype;
 // vm表示Due对象,obj表示代理对象,namespace表示命名空间
@@ -60,7 +61,8 @@ function defArrayFunc(obj, func, namespace, vm) {
         value: function (...args) {
             let original = arrProto[func];
             const result = original.apply(this, args);
-            renderData(vm, getNameSpace(namespace, prop));
+            rebuild(vm, getNameSpace(namespace, ''));
+            renderData(vm, getNameSpace(namespace, ''));
             console.log(getNameSpace('', obj));
             return result;
         }
