@@ -10,7 +10,7 @@ export function renderMixin(Due) {
         renderNode(this, this._vnode);
     }
 }
-
+//拿到模板对应的vnode
 export function renderData(vm, data) {
     let vnodes = template2Vnode.get(data);
     if (vnodes != null) {

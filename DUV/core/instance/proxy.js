@@ -60,8 +60,8 @@ function defArrayFunc(obj, func, namespace, vm) {
         value: function (...args) {
             let original = arrProto[func];
             const result = original.apply(this, args);
-            renderData(vm, getNameSpace(namespace, prop));
-            console.log(getNameSpace('', obj));
+            renderData(vm, getNameSpace(namespace, ''));
+            console.log(getNameSpace(namespace, ''));
             return result;
         }
     })
