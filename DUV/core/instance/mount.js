@@ -1,7 +1,7 @@
 import VNode from "../vdom/vnode.js";
 import { vforInit } from "./grammer/vfor.js";
 import { vmodel } from "./grammer/vmodel.js";
-import { prepareRender, getTemplate2Vnode, getVnode2Template } from "./render.js";
+import { prepareRender, getTemplate2Vnode, getVnode2Template, getVnodeByTemplate, clearMap } from "./render.js";
 import { mergeAttr } from '../utils/ObjectUtil.js'
 
 export function initMount(Due) {
@@ -42,7 +42,8 @@ function constructVNode(vm, elm, parent) {
             vnode.env = mergeAttr(vnode.env, parent ? parent.env : {});
         }
     }
-    let childs = vnode.elm.childNodes;
+    let childs = vnode.nodeType == 0 ? vnode.parent.elm.children : vnode.elm.childNodes;
+    let len = vnode.nodeType == 0 ? vnode.parent.elm.children.length : vnode.elm.childNodes.length;
     for (let i = 0; i < childs.length; i++) {
         let childNodes = constructVNode(vm, childs[i], vnode);
         if (childNodes instanceof VNode) {//返回单一节点
@@ -76,4 +77,15 @@ function analysisAttr(vm, elm, parent) {
     }
 }
 
-// 合并标签属性上的env  
+//通过数组方法修改list之后重新构建对应的节点
+export function rebuild(vm, template) {
+    let virtualNode = getVnodeByTemplate(template);
+    for (let i = 0; i < virtualNode.length; i++) {
+        virtualNode[i].parent.elm.innerHTML = '';
+        virtualNode[i].parent.elm.appendChild(virtualNode[i].elm);
+        let result = constructVNode(vm, virtualNode[i].elm, virtualNode[i].parent);
+        virtualNode[i].parent.children = [result];
+        clearMap();
+        prepareRender(vm, vm._vnode);
+    }
+}
