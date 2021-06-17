@@ -24,12 +24,10 @@ export function renderNode(vm, vnode) {
     if (vnode.nodeType == 3) {//是文本节点
         let templates = vnode2Template.get(vnode);
         if (templates) {
-            console.log(vnode);
             let result = vnode.text;
             for (let i = 0; i < templates.length; i++) {
                 let templateValue = getTemplateValue([vm._data, vnode.env], templates[i])//当前节点的参数可以来自于Due对象,还可以来自于父级节点
                 if (templateValue) {
-                    console.log(templateValue, 11111);
                     result = result.replace('{{' + templates[i] + '}}', templateValue)
                 }
             }
@@ -108,10 +106,8 @@ function getTemplateName(template) {
 }
 
 export function getTemplate2Vnode() {
-    console.log(template2Vnode);
 }
 export function getVnode2Template() {
-    console.log(vnode2Template);
 }
 
 function getTemplateValue(objs, templateName) {

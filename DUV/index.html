@@ -6,6 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,6 +25,11 @@
         <ul>
             <li v-for="(key) in list">姓名:{{key.a}},年龄:{{key.b}}</li>
         </ul>
+        <img v-bind:src="imgSrc" alt="" />
+        <br/>
+        <span v-bind:class='haha'>我的天啊</span>
+        <br>
+        <span v-bind:class='{red: obj.x > 2,blue : obj.x < 2}'>我的天1234345</span>
     </div>
     
     <!-- type=module  -->
@@ -30,8 +43,11 @@
                      content: 'wanxinlun', 
                      description: 'hello world',
                       obj: { x: 1, y: 2 }, 
-                      list: [{ a: 'wanxinlun', b: 18 }, { a: 'monkey', b: 23 },{ a: 'monkey', b: 23 }]
-                     } 
+                      list: [{ a: 'wanxinlun', b: 18 }, { a: 'monkey', b: 23 },{ a: 'monkey', b: 23 }],
+                     imgSrc:'https://tse1-mm.cn.bing.net/th/id/OIP.xali8lWDOoZGuG33yuvfogHaDQ?pid=ImgDet&rs=1',
+                     haha:'red'
+                } ,
+
             }
         )
     </script>

@@ -28,7 +28,6 @@ function analysisInstruction(vm, instruction, elm, parent) {
         let tempDom = document.createElement(elm.nodeName);
         tempDom.innerHTML = elm.innerHTML;
         let env = analysisKV(insSet[0], dataSet[i], i);//获取局部变量
-        console.log(env, 9090);
         tempDom.setAttribute('env', JSON.stringify(env));//将局部变量设置到标签上
         parent.elm.appendChild(tempDom);
         resultSet.push(tempDom);
@@ -49,7 +48,6 @@ function analysisKV(instruction, value, index) {
     let obj = {};
     if (keys.length >= 1) {
         obj[keys[0].trim()] = value;
-        console.log(obj[keys[0].trim()], 8765);
 
     }
     if (keys.length >= 2) {

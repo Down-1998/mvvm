@@ -79,7 +79,6 @@ function constructObjProxy(vm, obj, namespace) {
                 return obj[prop];
             },
             set(value) {
-                console.log('====');
                 obj[prop] = value
                 renderData(vm, getNameSpace(namespace, prop))
             }

@@ -6,7 +6,6 @@ export function getValue(obj, name) {
     let nameList = name.split('.');
     let temp = obj;
     for (let i = 0; i < nameList.length; i++) {
-        // console.log(nameList[i], temp, 99999);
         if (temp[nameList[i]]) {
             temp = temp[nameList[i]]
         } else {
@@ -51,7 +50,6 @@ export function mergeAttr(obj1, obj2) {
     for (let i = 0; i < obj2Attrs.length; i++) {
         result[obj2Attrs[i]] = obj2[obj2Attrs[i]];
     }
-    console.log(result, 876);
     return result;
 }
 
@@ -81,5 +79,11 @@ function cloneArray(obj) {
         result[i] = clone(obj[i]);
 
     }
+    return result;
+}
+
+export function getEnvAttr(vm, vnode) {
+    let result = mergeAttr(vm._data, vnode.env);
+    result = mergeAttr(result, vm._computed);
     return result;
 }

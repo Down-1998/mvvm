@@ -3,6 +3,7 @@ import { vforInit } from "./grammer/vfor.js";
 import { vmodel } from "./grammer/vmodel.js";
 import { prepareRender, getTemplate2Vnode, getVnode2Template, getVnodeByTemplate, clearMap } from "./render.js";
 import { mergeAttr } from '../utils/ObjectUtil.js'
+import { checkVBind } from "./grammer/vbind.js";
 
 export function initMount(Due) {
     Due.prototype.$mount = function (el) {
@@ -16,7 +17,6 @@ export function mount(vm, elm) {
     console.log(elm);
     //进行挂载
     vm._vnode = constructVNode(vm, elm, null);
-    console.log(vm._vnode.elm.nodeValue);
     //预备渲染
     prepareRender(vm, vm._vnode);
     getTemplate2Vnode();
@@ -37,11 +37,11 @@ function constructVNode(vm, elm, parent) {
         if (elm.nodeType == 1 && elm.getAttribute('env')) {
 
             vnode.env = mergeAttr(vnode.env, JSON.parse(elm.getAttribute('env')))
-            console.log(vnode.env, 90900)
         } else {
             vnode.env = mergeAttr(vnode.env, parent ? parent.env : {});
         }
     }
+    checkVBind(vm, vnode);
     let childs = vnode.nodeType == 0 ? vnode.parent.elm.children : vnode.elm.childNodes;
     let len = vnode.nodeType == 0 ? vnode.parent.elm.children.length : vnode.elm.childNodes.length;
     for (let i = 0; i < childs.length; i++) {
