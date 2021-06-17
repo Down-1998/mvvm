@@ -1,8 +1,8 @@
 import { constructProxy } from './proxy.js'
-import {mount} from './mount.js'
+import { mount } from './mount.js'
 let uid = 0;
 export function initMixin(Due) {
-    Due.prototype._init = function(options) {
+    Due.prototype._init = function (options) {
         const vm = this;
         vm.uid = uid++;
         vm._isDue = true;
@@ -12,11 +12,17 @@ export function initMixin(Due) {
         }
         //初始化created
         //初始化methods
+        if (options && options.methods) {
+            vm._methods = options.methods;
+            for (let temp in options.methods) {
+                vm[temp] = options.methods[temp];
+            }
+        }
         //初始化computed
         //初始化el并挂载
-        if(options && options.el){
+        if (options && options.el) {
             let rootDom = document.getElementById(options.el);
-            mount(vm,rootDom); 
+            mount(vm, rootDom);
         }
     }
 }

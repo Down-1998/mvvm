@@ -21,7 +21,7 @@
         你好,{{content}},{{description}}<br/>
         <span>{{description}}</span><br/>
         {{obj.x}}
-        <input type="text" v-model="obj.x" />
+        <input type="text" v-model="obj.x" v-on:keydown='enter'/>
         <ul>
             <li v-for="(key) in list">姓名:{{key.a}},年龄:{{key.b}}</li>
         </ul>
@@ -47,6 +47,11 @@
                      imgSrc:'https://tse1-mm.cn.bing.net/th/id/OIP.xali8lWDOoZGuG33yuvfogHaDQ?pid=ImgDet&rs=1',
                      haha:'red'
                 } ,
+                methods:{
+                    enter(){
+                        console.log('hello world');
+                    }
+                }
 
             }
         )

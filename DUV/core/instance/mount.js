@@ -4,6 +4,7 @@ import { vmodel } from "./grammer/vmodel.js";
 import { prepareRender, getTemplate2Vnode, getVnode2Template, getVnodeByTemplate, clearMap } from "./render.js";
 import { mergeAttr } from '../utils/ObjectUtil.js'
 import { checkVBind } from "./grammer/vbind.js";
+import { checkVon } from "./grammer/von.js";
 
 export function initMount(Due) {
     Due.prototype.$mount = function (el) {
@@ -42,6 +43,7 @@ function constructVNode(vm, elm, parent) {
         }
     }
     checkVBind(vm, vnode);
+    checkVon(vm, vnode);
     let childs = vnode.nodeType == 0 ? vnode.parent.elm.children : vnode.elm.childNodes;
     let len = vnode.nodeType == 0 ? vnode.parent.elm.children.length : vnode.elm.childNodes.length;
     for (let i = 0; i < childs.length; i++) {
