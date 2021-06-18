@@ -11,6 +11,9 @@ export function initMixin(Due) {
             vm._data = constructProxy(vm, options.data, '');
         }
         //初始化created
+        if (options && options.created) {
+            vm._created = options.created;
+        }
         //初始化methods
         if (options && options.methods) {
             vm._methods = options.methods;

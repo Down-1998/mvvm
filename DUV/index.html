@@ -44,13 +44,16 @@
                      description: 'hello world',
                       obj: { x: 1, y: 2 }, 
                       list: [{ a: 'wanxinlun', b: 18 }, { a: 'monkey', b: 23 },{ a: 'monkey', b: 23 }],
-                     imgSrc:'https://tse1-mm.cn.bing.net/th/id/OIP.xali8lWDOoZGuG33yuvfogHaDQ?pid=ImgDet&rs=1',
-                     haha:'red'
+                      imgSrc:'https://tse1-mm.cn.bing.net/th/id/OIP.xali8lWDOoZGuG33yuvfogHaDQ?pid=ImgDet&rs=1',
+                      haha:'red'
                 } ,
                 methods:{
                     enter(){
                         console.log('hello world');
                     }
+                },
+                created:function () {
+                    console.log('创建完了');
                 }
 
             }
